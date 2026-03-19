@@ -1,10 +1,10 @@
 # SalaryPredictionML
 Создание классификационных моделей и SVM для предсказания заработку человека по его образованию и возрасту
 ## Проделанная работа:
--
--
--
--
+- Загрузка и первичный анализ данных
+- Визуализация отдельных признаков
+- Выбор признаков и кодирование категориальных переменных
+- Кодирование целевой переменной
 -
 ```python
 import pandas as pd
@@ -21,8 +21,11 @@ df.isnull().sum()
 df.shape
 df.head()
 df.info()
-sns.boxplot(x="", y="age", data=df)
+
+sns.boxplot(x="income", y="age", data=df)
 plt.show()
+![Возраст по доходу](boxplot_income_age.png)
+
 
 sns.barplot(x="income", y="hours-per-week", data=df)
 plt.show()
@@ -37,7 +40,7 @@ y = pd.Series( data = le.transform( df['income'] ) )
 y.head()
 model = LogisticRegression()
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model.fit( X, y )
+model.fit( X_train, y_train )
 predictions = model.predict(X_test)
 predictions[:5]
 model.predict(X_test)
